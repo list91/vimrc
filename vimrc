@@ -63,23 +63,25 @@ function MyDiff()
     let &shellxquote=l:shxq_sav
   endif
 endfunction
+
 " Активация плагина NERDTree
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
-let g:NERDTreeGitStatusGitBinPath = '.git' " default: git (auto find in path)
+
+"let g:NERDTreeGitStatusGitBinPath = '.git' " default: git (auto find in path)
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-  \ 'Modified'  :'✹',
-  \ 'Staged'    :'✚',
-  \ 'Untracked' :'✭',
-  \ 'Renamed'   :'➜',
-  \ 'Unmerged'  :'═',
-  \ 'Deleted'   :'✖',
-  \ 'Dirty'     :'✗',
-  \ 'Ignored'   :'☒',
-  \ 'Clean'     :'✔︎',
-  \ 'Unknown'   :'?',
+  \ 'Modified'  :'1',
+  \ 'Staged'    :'2',
+  \ 'Untracked' :'3',
+  \ 'Renamed'   :'4',
+  \ 'Unmerged'  :'w',
+  \ 'Deleted'   :'w',
+  \ 'Dirty'     :'s',
+  \ 'Ignored'   :'a',
+  \ 'Clean'     :'a',
+  \ 'Unknown'   :'d',
   \ }
 let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
