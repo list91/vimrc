@@ -66,21 +66,48 @@ endfunction
 " Активация плагина NERDTree
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 call plug#end()
+let g:NERDTreeGitStatusGitBinPath = '.git' " default: git (auto find in path)
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+  \ 'Modified'  :'✹',
+  \ 'Staged'    :'✚',
+  \ 'Untracked' :'✭',
+  \ 'Renamed'   :'➜',
+  \ 'Unmerged'  :'═',
+  \ 'Deleted'   :'✖',
+  \ 'Dirty'     :'✗',
+  \ 'Ignored'   :'☒',
+  \ 'Clean'     :'✔︎',
+  \ 'Unknown'   :'?',
+  \ }
+let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
+let g:NERDTreeGitStatusShowClean = 1 " default: 0
+let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
 
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+autocmd VimEnter * NERDTree
 
 "свитчи в норм режиме
 "открыть закрыть бар
 nnoremap <C-b> :NERDTreeToggle<CR>
 
-"nnoremap <C-x> :NERDTree t
-nnoremap <C-x> :tabe getline(".")<CR>
-"nnoremap <C-Right> :tabnext
+nnoremap <C-x> :call feedkeys("t")<CR>
+
 nnoremap <C-Right> :tabnext<CR>
 nnoremap <C-Left> :tabprevious<CR>
-
+vmap <C-c> "+y
+vmap <C-v> <Esc>"+gp
+nnoremap <C-q> <C-w>w
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
 "nnoremap <C-f> :NERDTreeFind<CR>
+
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * if &buftype != 'quickfix' && getcmdwintype() == '' | silent NERDTreeMirror | endif
+let g:NERDTreeFileLines = 1
+
+"Для закрытия текущего буфера (файла): :bd или :bdelete
+"Для закрытия текущей вкладки (вместе с буферами): :tabclose или :q
