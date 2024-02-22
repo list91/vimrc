@@ -76,6 +76,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
+Plug 'maxmellon/vim-jsx-pretty'
+Plug '1995eaton/vim-better-javascript-completion'
 call plug#end()
 
 let g:airline_theme='wombat'
@@ -109,6 +113,11 @@ let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time
 """
 
 
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+
+
 " Start NERDTree and put the cursor back in the other window.
 "autocmd VimEnter * NERDTree
 let NERDTreeMinimalUI=1
@@ -120,6 +129,11 @@ autocmd VimEnter * if argc() == 0 | NERDTree | endif
 
 " Отобразить пустое окно при запуске Vim
 "autocmd VimEnter * execute 'silent! belowright 10new' | execute 'resize 5'
+
+nnoremap <A-Down> :m+<CR>
+nnoremap <A-Up> :m-2<CR>
+
+nnoremap <C-Down> :t .+1<CR>
 
 
 map <c-Up> :call cursor(line('.') - 2, col('.'))<CR>
@@ -142,15 +156,20 @@ let NERDTreeShowBookmarks=1
 nnoremap <C-b> :tabdo NERDTreeClose<CR>
 nnoremap <C-g> :tabdo NERDTree<CR>
 
-nnoremap <C-x> :q<CR>
-nnoremap <C-s> :w<CR>
+nnoremap <C-x> :q!<CR>
+nnoremap <C-s> :w!<CR>
 nnoremap <C-n> :belowright terminal ++rows=10 npm start<CR>
 
-nnoremap <C-Right> :tabnext<CR>call ToggleNerdtree()<CR>
-nnoremap <C-Left> :tabprevious<CR>call ToggleNerdtree()<CR>
+nnoremap <M-Right> :tabnext<CR>
+nnoremap <M-Left> :tabprevious<CR>
+
+nnoremap <silent> <S-Right> V
+
+set whichwrap+=<,>,h,l
+
 
 vmap <C-c> "+y
-vmap <C-v> <Esc>"+gp
+vmap <Space> "+gp
 
 nnoremap <C-q> <C-w><C-w>
 tnoremap <C-q> <C-w><C-w>
