@@ -68,41 +68,92 @@ endfunction
 call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-scripts/vim-gitgutter'
+Plug 'morhetz/gruvbox'
+
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
-"let g:NERDTreeGitStatusGitBinPath = '.git' " default: git (auto find in path)
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-  \ 'Modified'  :'1',
-  \ 'Staged'    :'2',
-  \ 'Untracked' :'3',
-  \ 'Renamed'   :'4',
-  \ 'Unmerged'  :'w',
-  \ 'Deleted'   :'w',
-  \ 'Dirty'     :'s',
-  \ 'Ignored'   :'a',
-  \ 'Clean'     :'a',
-  \ 'Unknown'   :'d',
-  \ }
+let g:airline_theme='wombat'
+
+
+" Установка цветовой схемы Gruvbox со стилем dark hard
+colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+
+set shell=sh
 let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
-let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
-let g:NERDTreeGitStatusUntrackedFilesMode = 'all' " a heavy feature too. default: normal
-let g:NERDTreeGitStatusShowClean = 1 " default: 0
-let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+
+"""
+" Initial NERDTree width
+"let NERDTreeWinSize=50
+
+" Close NERDtree when files was opened
+"let NERDTreeQuitOnOpen=1
+
+" Show NERDTree bookmarks
+"let NERDTreeShowBookmarks=1
+
+" Display arrows instead of ascii art in NERDTree
+"let NERDTreeDirArrows=1
+
+" Change current working directory based on root directory in NERDTree
+"let NERDTreeChDirMode=2
+
+" Start NERDTree in minimal UI mode (No help lines)
+"let NERDTreeMinimalUI=1
+"""
+
 
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree
+"autocmd VimEnter * NERDTree
+let NERDTreeMinimalUI=1
+
+" Автоматически открывать NERDTree при старте Vim
+"autocmd VimEnter * NERDTree
+" Открывать NERDTree при запуске Vim без аргументов в текущей директории
+autocmd VimEnter * if argc() == 0 | NERDTree | endif
+
+" Отобразить пустое окно при запуске Vim
+"autocmd VimEnter * execute 'silent! belowright 10new' | execute 'resize 5'
+
+
+map <c-Up> :call cursor(line('.') - 2, col('.'))<CR>
+map <c-Down> :call cursor(line('.') + 2, col('.'))<CR>
+
+nnoremap <C-z> :call feedkeys("t")<CR>
+"imap <C-CR> I just pressed Control+Enter<CR>
+
+
+let NERDTreeShowBookmarks=1
+
+
+"autocmd BufEnter * lcd %:p:h
+
+"autocmd BufEnter * if &filetype == 'nerdtree' | echo expand('%:p:h') | endif
+
 
 "свитчи в норм режиме
 "открыть закрыть бар
-nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-b> :tabdo NERDTreeClose<CR>
+nnoremap <C-g> :tabdo NERDTree<CR>
 
-nnoremap <C-x> :call feedkeys("t")<CR>
+nnoremap <C-x> :q<CR>
+nnoremap <C-s> :w<CR>
+nnoremap <C-n> :belowright terminal ++rows=10 npm start<CR>
 
-nnoremap <C-Right> :tabnext<CR>
-nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>call ToggleNerdtree()<CR>
+nnoremap <C-Left> :tabprevious<CR>call ToggleNerdtree()<CR>
+
 vmap <C-c> "+y
 vmap <C-v> <Esc>"+gp
-nnoremap <C-q> <C-w>w
+
+nnoremap <C-q> <C-w><C-w>
+tnoremap <C-q> <C-w><C-w>
 "nnoremap <leader>n :NERDTreeFocus<CR>
 "nnoremap <C-n> :NERDTree<CR>
 "nnoremap <C-f> :NERDTreeFind<CR>
@@ -113,3 +164,4 @@ let g:NERDTreeFileLines = 1
 
 "Для закрытия текущего буфера (файла): :bd или :bdelete
 "Для закрытия текущей вкладки (вместе с буферами): :tabclose или :q
+
