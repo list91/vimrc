@@ -15,7 +15,8 @@ if has('autocmd')
     autocmd BufWinEnter * silent loadview
 endif
 
-
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 
 set number
 
