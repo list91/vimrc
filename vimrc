@@ -15,8 +15,7 @@ if has('autocmd')
     autocmd BufWinEnter * silent loadview
 endif
 
-noremap <Leader>y "+y
-noremap <Leader>p "+p
+
 
 set number
 
@@ -87,6 +86,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
+
 "Plug 'dense-analysis/ale'
 
 Plug 'Valloric/YouCompleteMe'
@@ -105,7 +107,8 @@ let g:ale_fixers = {
  \   'javascript': ['eslint'],
  \}
 
-
+noremap <Leader>y "+y
+noremap <Leader>p "+p
 
 let g:airline_theme='wombat'
 
