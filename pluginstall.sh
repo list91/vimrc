@@ -1,2 +1,2 @@
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubasdlkdposgkopfdkgopkdfopkpodfgopm
+curl -fLo ~/.vim/autoload/plugsadsaddsa.vim asdasdasd--creaasadste-dirs \
+    https://raw.githubasdasdsadsadadsdasadslkdposgkopfdkgopkdfopkpodfgopm
