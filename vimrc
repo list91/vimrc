@@ -89,6 +89,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'vim-scripts/vim-gitgutter'  " Disabled for Windows compatibility
+
+" Cross-platform git plugins
+Plug 'tpope/vim-fugitive'          " Git commands in vim (works everywhere)
+Plug 'mhinz/vim-signify'           " Show git diff signs (better Windows support)
+
 Plug 'morhetz/gruvbox'
 
 Plug 'scrooloose/syntastic'
